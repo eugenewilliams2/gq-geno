@@ -488,6 +488,51 @@
       #stars { display: none; }
       .nebula, .prop, .vinyl-sun svg, .equalizer span { animation: none; }
     }
+
+    /* ---------- store ---------- */
+    .store-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(260px, 100%), 1fr));
+      gap: 24px;
+    }
+    .product-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform 0.25s, border-color 0.25s, background 0.25s;
+    }
+    .product-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 178, 46, 0.35);
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .product-art {
+      aspect-ratio: 1 / 1;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(150deg, rgba(255, 178, 46, 0.14), rgba(180, 77, 255, 0.14));
+      border-bottom: 1px solid var(--border);
+    }
+    .product-art svg { width: 46%; height: 46%; opacity: 0.85; }
+    .product-body { padding: 18px 18px 20px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+    .product-body h3 { font-size: 1.05rem; }
+    .product-tag {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--solar);
+    }
+    .product-desc { color: var(--muted); font-size: 0.88rem; flex: 1; }
+    .product-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 12px; gap: 10px; }
+    .product-price {
+      font-family: 'Archivo Black', sans-serif; font-size: 1.25rem;
+      background: var(--accent-grad); -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .buy-btn { padding: 11px 20px; font-size: 0.8rem; cursor: pointer; border: 0; }
+    .buy-btn.is-soon { background: var(--panel); color: var(--muted); border: 1px solid var(--border); box-shadow: none; cursor: default; }
+    .store-note { color: var(--muted); font-size: 0.82rem; margin-top: 22px; }
+    .store-note a { color: var(--solar); }
   </style>
 </head>
 <body>
@@ -536,6 +581,7 @@
       <a href="#music">Music</a>
       <a href="#releases">Releases</a>
       <a href="#about">About</a>
+      <a href="#store">Store</a>
       <a href="#connect">Connect</a>
     </div>
   </nav>
@@ -709,6 +755,82 @@
     </div>
   </section>
 
+  <!--
+    ┌─────────────────────────────────────────────────────────────────────┐
+    │  STORE — Stripe Payment Links                                         │
+    │                                                                       │
+    │  These products use Stripe Payment Links (no backend, no API keys).   │
+    │  To make a button live:                                               │
+    │    1. In your Stripe Dashboard → Product catalog → Payment links,     │
+    │       create a payment link for the product.                          │
+    │    2. Copy the link (looks like https://buy.stripe.com/xxxxxxxx ).    │
+    │    3. Paste it into the matching data-pay="" attribute below and       │
+    │       update the name, price, and description.                        │
+    │  Buttons with an empty data-pay show "Coming soon" until you set one. │
+    └─────────────────────────────────────────────────────────────────────┘
+  -->
+  <section id="store" class="reveal" aria-label="GQ GENO store">
+    <div class="section-tag">Merch &amp; Drops</div>
+    <h2 class="section-title">Store</h2>
+    <p class="section-sub">Cop the latest. Secure checkout powered by Stripe.</p>
+
+    <div class="store-grid">
+      <div class="product-card">
+        <div class="product-art">
+          <svg viewBox="0 0 100 100" fill="none" stroke="#ffb22e" stroke-width="4" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="50" cy="50" r="44"/><circle cx="50" cy="50" r="14"/><circle cx="50" cy="50" r="3" fill="#ffb22e"/>
+          </svg>
+        </div>
+        <div class="product-body">
+          <span class="product-tag">Digital Album</span>
+          <h3>GQ SOLAR</h3>
+          <p class="product-desc">17-track album. Instant digital download after checkout.</p>
+          <div class="product-foot">
+            <span class="product-price">$9.99</span>
+            <a class="btn btn-primary buy-btn" data-pay="" href="#">Buy</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-art">
+          <svg viewBox="0 0 100 100" fill="none" stroke="#ff4d2e" stroke-width="4" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M30 22 L18 32 L26 42 L32 38 L32 80 L68 80 L68 38 L74 42 L82 32 L70 22 L60 22 Q50 32 40 22 Z"/>
+          </svg>
+        </div>
+        <div class="product-body">
+          <span class="product-tag">Apparel</span>
+          <h3>GQ GENO Logo Tee</h3>
+          <p class="product-desc">Premium cotton tee with the cosmic GQ GENO wordmark.</p>
+          <div class="product-foot">
+            <span class="product-price">$30</span>
+            <a class="btn btn-primary buy-btn" data-pay="" href="#">Buy</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-art">
+          <svg viewBox="0 0 100 100" fill="none" stroke="#b44dff" stroke-width="4" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M28 30 L20 40 L28 50 L34 44 L34 82 L66 82 L66 44 L72 50 L80 40 L72 30 L62 30 Q50 26 38 30 Z"/>
+            <path d="M50 30 L50 50 M42 82 L42 60 M58 82 L58 60"/>
+          </svg>
+        </div>
+        <div class="product-body">
+          <span class="product-tag">Apparel</span>
+          <h3>GQ GENO Hoodie</h3>
+          <p class="product-desc">Heavyweight hoodie. Solar-orange embroidery on space black.</p>
+          <div class="product-foot">
+            <span class="product-price">$55</span>
+            <a class="btn btn-primary buy-btn" data-pay="" href="#">Buy</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="store-note">Powered by <a href="https://stripe.com" target="_blank" rel="noopener">Stripe</a> — secure checkout. Products and prices are placeholders; set your Stripe Payment Links to go live.</p>
+  </section>
+
   <section id="connect" class="reveal" aria-label="Connect with GQ GENO">
     <div class="section-tag">Stay in Orbit</div>
     <h2 class="section-title">Connect</h2>
@@ -766,6 +888,22 @@
       resize();
       requestAnimationFrame(draw);
     }
+
+    // Store buy buttons (Stripe Payment Links)
+    document.querySelectorAll('.buy-btn').forEach(btn => {
+      const link = (btn.dataset.pay || '').trim();
+      if (/^https:\/\/(buy\.stripe\.com|.*stripe\.com)\//.test(link)) {
+        btn.href = link;
+        btn.target = '_blank';
+        btn.rel = 'noopener';
+      } else {
+        btn.classList.add('is-soon');
+        btn.textContent = 'Coming soon';
+        btn.removeAttribute('href');
+        btn.setAttribute('aria-disabled', 'true');
+        btn.addEventListener('click', e => e.preventDefault());
+      }
+    });
 
     // Equalizer bars
     const eq = document.getElementById('equalizer');
